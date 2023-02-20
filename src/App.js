@@ -1,31 +1,25 @@
-import React, {useState} from "react";
+import React, { useState } from "react";
 import { Provider } from "react-redux";
 import store from "./store";
 import MovieList from "./component/MovieList";
-import './styles.css'
+import Search from "./component/Search";
+import "./styles.css";
 import Header from "./component/Header";
 import Favourite from "./component/Favourite";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 
-
 const App = () => {
-    const [favouriteMovie, setFavouriteMovie] = useState([]);
-
-const addFavouriteMovie = (movie) => {
-  const newList = [...favouriteMovie, movie];
-  setFavouriteMovie(newList);
-  console.log(favouriteMovie);
-}
-    return(
+  return (
     <Provider store={store}>
-        <Router>
+      <Router>
         <Header />
-            <Switch>
-                <Route exact path="/favourite" render={()=> <Favourite favouriteMovie={favouriteMovie} />} />
-                <Route exact path="/" render={()=><MovieList handleClick={addFavouriteMovie} />} />
-            </Switch>
-        </Router>
+        <Switch>
+          <Route exact path="/" render={() => <MovieList />} />
+          <Route exact path="/search" render={() => <Search />} />
+        </Switch>
+      </Router>
     </Provider>
-    )};
+  );
+};
 
 export default App;
